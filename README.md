@@ -10,7 +10,7 @@ Lisätietoja USEMARCON-ohjelmasta: http://www.nationallibrary.fi/libraries/forma
 
 KÄYTTÖ
 
-Kopioi konversiopaketti päätteellesi esimerkiksi "Download ZIP" -painikkeesta. Pura paketti haluamaasi sijaintiin esimerkiksi C:\Usemarcon\ -hakemiston alle. USEMARCONilla käytettävä varsinainen konversiotiedosto on ma2maisbd0.rul.
+Kopioi konversiopaketti päätteellesi esimerkiksi "Download ZIP" -painikkeesta. Pura paketti haluamaasi sijaintiin esimerkiksi C:\Usemarcon\ -hakemiston alle. USEMARCONilla käytettävä varsinainen konversiotiedosto on ma2maisbd0.ini.
 
 PALAUTE
 
