@@ -117,6 +117,7 @@ versio 30.3.2012 / Kansalliskirjasto
 008/30/         | 008/30/         | S
 008/30/         | 337(new)$a      | If (S = 'a' or S = 'b' or S = 'c') Then 'mikromuoto'
 008/30/         | 337(new)$a      | If (S = 'o' or S = 'q' or S = 's') or (RegFind(@245$h, '[Ee]lektr') >=0) Then 'elektroninen'
+008/30/         | 337(new)$a      | If (S = '|' or S = 'r' or S = 'd') and (Not Exists(%337)) Then 'ei välittävää laitetta''
 #endif
 
 
@@ -223,7 +224,6 @@ versio 30.3.2012 / Kansalliskirjasto
 008/34/         | 337(new)$a      | 'ei välittävää laitetta'
 008/34/         | 337(new)$a      | If (S = 'p') Then 'mikroskooppinen'
 #endif
-
 
 245I1            | 245I1           | S
 245I2            | 245I2           | S
