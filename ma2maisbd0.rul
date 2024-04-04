@@ -39,7 +39,7 @@ versio 30.3.2012 / Kansalliskirjasto
 000/7/          | 000/7/          | If (RegFind(@245$h, '[Kk]artta-aineisto') >=0) Then 'e'
 000/7/          | 000/7/          | If (RegFind(@245$h, '[Mm]oniviestin') >=0) Then 'o'
 000/7/          | 000/7/          | If (RegFind(@245$h, '\\b[Kk]uva') >=0) Then 'k'
-//KYSYMYS: voiko leaderin aineistokoodia muuttaa n‰in, miten vaikuttaa 008-kentt‰‰n?
+//KYSYMYS: voiko leaderin aineistokoodia muuttaa noin, miten vaikuttaa 008:aan?
 //Esim. tekstin 008/33 = kirjallisuuslaji, videon 008/33 = visuaalisen aineiston tyyppi ->
 //moniviestimen (kirja + cd) koodi p = runo muuttuu mikroskoopin preparaatiksi
 007/1/          | 007/1/          | S
@@ -193,6 +193,8 @@ versio 30.3.2012 / Kansalliskirjasto
 #if (@000/7/ = 'm')
 008/27/         | 008/27/         | S
 008/27/         | 336(new)$a      | If (S = 'a' or S = 'c') Then 'Data'
+// NB! tietokonepli oletaan 2D:ksi ja se saa kaksi 336 kentt√§√§:
+008/27/         | 336(new)$a      | If (S = 'g') Then 'Kuva (liikkuva ; kaksiulotteinen)'
 008/27/         | 336(new)$a      | If (S = 'b' or S = 'f' or S = 'g') Then 'Tietokoneohjelma'
 008/27/         | 336(new)$a      | If (S = 'd' or S = 'e') Then 'Teksti'
 008/27/         | 336(new)$a      | If (S = 'h') Then '√Ñ√§ni'
@@ -238,9 +240,9 @@ versio 30.3.2012 / Kansalliskirjasto
 245$p            | <F45$p          | S
 245$6            | <F45$6          | S
 245$8            | <F45$8          | S
-F45 | 245 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+F45 | 245 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 246I1            | 246I1           | S
 246I2            | 246I2           | S
@@ -254,9 +256,9 @@ F45 | 245 | S;
 246$p            | <G46$p          | S
 246$6            | <G46$6          | S
 246$8            | <G46$8          | S
-G46 | 246 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+G46 | 246 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 247I1            | 247I1           | S
 247I2            | 247I2           | S
@@ -270,9 +272,9 @@ G46 | 246 | S;
 247$x            | <K47$x          | S
 247$6            | <K47$6          | S
 247$8            | <K47$8          | S
-K47 | 247 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+K47 | 247 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos punc puuttuu tai on virheellinen
 
 // 505-kentan puuttuvan 1. indikaattorin korjaus
 505I1            | 505I1           | S; Replace (' ' By '0')
@@ -293,9 +295,9 @@ K47 | 247 | S;
 740$5            | <H40$5          | S
 740$6            | <H40$6          | S
 740$8            | <H40$8          | S
-H40 | 740 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+H40 | 740 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos punc puuttuu tai on virheellinen
 
 760I1            | 760I1           | S
 760I2            | 760I2           | S
@@ -318,9 +320,9 @@ H40 | 740 | S;
 760$6            | <L60$6          | S
 760$7            | <L60$7          | S
 760$8            | <L60$8          | S
-L60 | 760 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+L60 | 760 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 762I1            | 762I1           | S
 762I2            | 762I2           | S
@@ -343,9 +345,9 @@ L60 | 760 | S;
 762$6            | <M62$6          | S
 762$7            | <M62$7          | S
 762$8            | <M62$8          | S
-M62 | 762 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+M62 | 762 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 765I1            | 765I1           | S
 765I2            | 765I2           | S
@@ -372,9 +374,9 @@ M62 | 762 | S;
 765$6            | <N65$6          | S
 765$7            | <N65$7          | S
 765$8            | <N65$8          | S
-N65 | 765 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+N65 | 765 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 767I1            | 767I1           | S
 767I2            | 767I2           | S
@@ -401,9 +403,9 @@ N65 | 765 | S;
 767$6            | <P67$6          | S
 767$7            | <P67$7          | S
 767$8            | <P67$8          | S
-P67 | 767 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+P67 | 767 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos punc puuttuu tai on virheellinen
 
 770I1            | 770I1           | S
 770I2            | 770I2           | S
@@ -430,9 +432,9 @@ P67 | 767 | S;
 770$6            | <Q70$6          | S
 770$7            | <Q70$7          | S
 770$8            | <Q70$8          | S
-Q70 | 770 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+Q70 | 770 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos punc puuttuu tai on virheellinen
 
 772I1            | 772I1           | S
 772I2            | 772I2           | S
@@ -459,9 +461,9 @@ Q70 | 770 | S;
 772$6            | <R72$6          | S
 772$7            | <R72$7          | S
 772$8            | <R72$8          | S
-R72 | 772 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+R72 | 772 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 
 773I1            | 773I1           | S
@@ -491,9 +493,9 @@ R72 | 772 | S;
 773$6            | <J73$6          | S
 773$7            | <J73$7          | S
 773$8            | <J73$8          | S
-J73 | 773 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+J73 | 773 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 
 774I1            | 774I1           | S
@@ -521,9 +523,9 @@ J73 | 773 | S;
 774$6            | <S74$6          | S
 774$7            | <S74$7          | S
 774$8            | <S74$8          | S
-S74 | 774 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+S74 | 774 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 775I1            | 775I1           | S
 775I2            | 775I2           | S
@@ -552,9 +554,9 @@ S74 | 774 | S;
 775$6            | <T75$6          | S
 775$7            | <T75$7          | S
 775$8            | <T75$8          | S
-T75 | 775 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
+T75 | 775 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 776I1            | 776I1           | S
 776I2            | 776I2           | S
@@ -581,10 +583,9 @@ T75 | 775 | S;
 776$6            | <U76$6          | S
 776$7            | <U76$7          | S
 776$8            | <U76$8          | S
-U76 | 776 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheelline
-
+U76 | 776 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 
 777I1            | 777I1           | S
@@ -609,9 +610,9 @@ U76 | 776 | S;
 777$6            | <V77$6          | S
 777$7            | <V77$7          | S
 777$8            | <V77$8          | S
-V77 | 777 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+V77 | 777 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 
 
@@ -640,9 +641,9 @@ V77 | 777 | S;
 780$6            | <A80$6          | S
 780$7            | <A80$7          | S
 780$8            | <A80$8          | S
-A80 | 780 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+A80 | 780 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 
 785I1            | 785I1           | S
@@ -670,9 +671,9 @@ A80 | 780 | S;
 785$6            | <B85$6          | S
 785$7            | <B85$7          | S
 785$8            | <B85$8          | S
-B85 | 785 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+B85 | 785 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 786I1            | 786I1           | S
 786I2            | 786I2           | S
@@ -702,9 +703,9 @@ B85 | 785 | S;
 786$6            | <C86$6          | S
 786$7            | <C86$7          | S
 786$8            | <C86$8          | S
-C86 | 786 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+C86 | 786 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
 
 787I1            | 787I1           | S
 787I2            | 787I2           | S
@@ -731,9 +732,9 @@ C86 | 786 | S;
 787$6            | <E87$6          | S
 787$7            | <E87$7          | S
 787$8            | <E87$8          | S
-E87 | 787 | S;
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); // S‰ilytt‰‰ v‰limerkit
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos v‰limerkki puuttuu tai on virheellinen
+E87 | 787 | S; \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '') // Jos punc puuttuu tai on virheellinen.
 
 #if (TAG != 'DEL')
 ???I1           | ???I1           | S
