@@ -19,13 +19,35 @@ versio 30.3.2012 / Kansalliskirjasto
 
 // TEKSTIAINEISTO JA TEKSTIKÄSIKIRJOITUS
 
-#if ((@000/7/ = 'a' Or @000/7/ = 't') And (Not Exists(@245$h)))
+
+// Guess based on form of item:
+#if (Not Exists(%336)) And (@000/7/ = 'a' Or @000/7/ = 't') And (Not Exists(@245$h))
 008/24/         | 008/24/         | S
 008/24/         | 336(new)$a      | If (S = 'f') Then 'Teksti (kosketeltava)' Else 'Teksti'
-008/24/         | 337(new)$a      | If (S = ' ' or S = '|' or S = 'd' or S = 'f' or S = 'r') Then 'ei välittävää laitetta'
+#endif
+
+// Guess based on form of item:
+#if (Not Exists(%337)) And (@000/7/ = 'a' Or @000/7/ = 't') And (Not Exists(@245$h))
+// No longer make decisions based on form of item '|':
+// 008/24/         | 337(new)$a      | If (S = ' ' or S = '|' or S = 'd' or S = 'f' or S = 'r') Then 'ei välittävää laitetta'
+008/24/         | 337(new)$a      | If (S = ' ' or S = 'd' or S = 'f' or S = 'r') Then 'ei välittävää laitetta'
 008/24/         | 337(new)$a      | If (S = 'a' or S = 'b' or S = 'c') Then 'mikromuoto'
 008/24/         | 337(new)$a      | If (S = 'o' or S = 'q' or S = 's') Then 'elektroninen'
 #endif
+
+
+// NV: base decision on field 300:
+#if (Not Exists(%337)) And (@000/7/ = 'a' Or @000/7/ = 't') And (Not Exists(@245$h)) And (RegFind(@300$a, '^([0-9]+ )mikrofilmi') >= 0)
+000         | 337(new)$a      | 'mikromuoto'
+#endif
+
+// Fallback (form of item is '|' etc):
+#if (Not Exists(%337)) And (@000/7/ = 'a' Or @000/7/ = 't') And (Not Exists(@245$h))
+000         | 337(new)$a      | If (S = ' ' or S = 'd' or S = 'f' or S = 'r') Then 'ei välittävää laitetta'
+#endif
+
+
+
 
 #if ((@000/7/ = 'a' Or @000/7/ = 't') And (RegFind (@245$h, '[Pp]istekirjoitus') >=0))
 000/            | 336(new)$a      | 'Teksti (kosketeltava)'
@@ -741,17 +763,3 @@ E87 | 787 | S; \
 ???I2           | ???I2           | S
 ???             | ???             | S
 #endif
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
