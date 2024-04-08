@@ -215,7 +215,7 @@ versio 30.3.2012 / Kansalliskirjasto
 #if (@000/7/ = 'm')
 008/27/         | 008/27/         | S
 008/27/         | 336(new)$a      | If (S = 'a' or S = 'c') Then 'Data'
-// NB! tietokonepli oletaan 2D:ksi ja se saa kaksi 336 kenttää:
+// NB! tietokonepeli oletaan 2D:ksi ja se saa kaksi 336 kenttää:
 008/27/         | 336(new)$a      | If (S = 'g') Then 'Kuva (liikkuva ; kaksiulotteinen)'
 008/27/         | 336(new)$a      | If (S = 'b' or S = 'f' or S = 'g') Then 'Tietokoneohjelma'
 008/27/         | 336(new)$a      | If (S = 'd' or S = 'e') Then 'Teksti'
@@ -264,7 +264,8 @@ versio 30.3.2012 / Kansalliskirjasto
 245$8            | <F45$8          | S
 F45 | 245 | S; \
             RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*( :| /| =| ;|\\.)', '\\1'); \
-            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', '')
+            RegReplace('\\s*[:/=;\\.]?\\s*$h[^$]*', ''); \
+	    RegReplace('($[a-z][^$]+[a-z0-9])\$', '\\1.')
 
 246I1            | 246I1           | S
 246I2            | 246I2           | S
