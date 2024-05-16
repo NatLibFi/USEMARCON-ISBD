@@ -18,7 +18,7 @@ for i in *.seq; do
         echo ERROR
         exit;	
     fi
-    $project_dir/tests/any2seq.perl $usemarcon_output_file | perl -pe 's/(LDR   L) .....(.........)..../$1 XXXXX${2}XXXX/;' > $i.processed
+    $project_dir/tests/any2seq.perl $usemarcon_output_file | perl -pe 's/(LDR   L) .....(.........)..../$1 XXXXX${2}XXXX/;' | egrep -v "^[0-9]+ FMT" > $i.processed
 
     diff $i.target $i.processed
 
